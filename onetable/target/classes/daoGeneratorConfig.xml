@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--配置要链接的数据库的数据源-->
+    <classPathEntry location="C:/devWorkspace/onetable/src/main/resources/postgresql-42.2.23.jar"/>
+    <!---Mybatis上下文-->
+    <context id="PostgresqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+    	<plugin type="onetable.dao.DaoCustomPlugin"></plugin>
+    	<commentGenerator type="onetable.CustomCommentGenerator"></commentGenerator>
+    	
+        <!--配置数据库的链接信息-->
+        <jdbcConnection driverClass="org.postgresql.Driver"
+                        connectionURL="jdbc:postgresql://172.29.234.104:5432/postgres" userId="postgres"
+                        password="admin"/>
+        <!--数据库BigDecimals字段在java中定义-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--实体类生成信息-->
+        <javaModelGenerator targetPackage="jp.tapf.vttktd.common.entity" targetProject="src/test/java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+            <property name="rootClass" value="jp.tapf.vttktd.common.entity.BaseOnetableEntity"/>
+        </javaModelGenerator>
+        <!--mybatis 的xml文件地址-->
+        <sqlMapGenerator targetPackage="sql" targetProject="src/test/resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <!--mybatis的mapper接口-->
+        <javaClientGenerator targetPackage="jp.tapf.vttktd.common.dao" targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+        <!--要生成的表结构-->
+        <table tableName="cons_useat_stk_t" schema="public"
+               enableSelectByPrimaryKey = "false" enableDeleteByPrimaryKey="false"
+               enableUpdateByPrimaryKey = "false"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+               <property name="useActualColumnNames" value="false" />
+        </table>
+ 
+    </context>
+ 
+</generatorConfiguration>
